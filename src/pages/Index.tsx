@@ -10,6 +10,7 @@ import { Counter } from "@/components/Counter";
 
 const Index = () => {
   return (
+    <a href="/admin" className="text-white bg-red-500 p-4">GO TO ADMIN</a>
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <Navbar />
 
