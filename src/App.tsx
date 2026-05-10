@@ -10,6 +10,7 @@ import Evaluate from "./pages/Evaluate.tsx";
 import Results from "./pages/Results.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import History from "./pages/History.tsx";
+import AdminPanel from "./pages/AdminPanel";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          <Route path="/admin" element={<AdminPanel />} />
           <Route path="/" element={<Index />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/evaluate" element={<Evaluate />} />
