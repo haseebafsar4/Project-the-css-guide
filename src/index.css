@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Dark Luxury Academic — deep midnight, electric blue, gold */
+@layer base {
+  :root {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 96%;
+
+    --card: 222 40% 9%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 222 40% 9%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 6%;
+    --primary-glow: 217 91% 70%;
+
+    --secondary: 222 30% 14%;
+    --secondary-foreground: 210 40% 96%;
+
+    --muted: 222 30% 14%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 38 92% 55%;
+    --accent-foreground: 222 47% 6%;
+    --accent-glow: 45 93% 65%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 30% 18%;
+    --input: 222 30% 14%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.875rem;
+
+    /* Brand-specific tokens */
+    --gold: 38 92% 55%;
+    --electric: 217 91% 60%;
+    --midnight: 222 47% 6%;
+
+    /* Gradients */
+    --gradient-hero: radial-gradient(ellipse at top, hsl(217 91% 20% / 0.4), transparent 60%), radial-gradient(ellipse at bottom right, hsl(38 92% 30% / 0.2), transparent 60%);
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-gold: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-glow)));
+    --gradient-text: linear-gradient(135deg, hsl(210 40% 98%), hsl(217 91% 75%));
+    --gradient-luxury: linear-gradient(135deg, hsl(217 91% 60%), hsl(38 92% 55%));
+
+    /* Shadows */
+    --shadow-elegant: 0 20px 60px -15px hsl(217 91% 50% / 0.35);
+    --shadow-gold: 0 20px 60px -15px hsl(38 92% 50% / 0.4);
+    --shadow-glow: 0 0 60px hsl(217 91% 60% / 0.5);
+
+    /* Glass */
+    --glass-bg: hsl(222 40% 12% / 0.5);
+    --glass-border: hsl(217 91% 60% / 0.15);
+
+    /* Transitions */
+    --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 222 47% 6%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 222 47% 6%;
+    --sidebar-accent: 222 30% 14%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 217 30% 18%;
+    --sidebar-ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Outfit', system-ui, sans-serif;
+    background-image: var(--gradient-hero);
+    background-attachment: fixed;
+  }
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Cormorant Garamond', 'Outfit', serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+  }
+  .glass-strong {
+    background: hsl(222 40% 14% / 0.7);
+    backdrop-filter: blur(24px);
+    border: 1px solid hsl(217 91% 60% / 0.2);
+  }
+  .text-gradient {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .text-luxury {
+    background: var(--gradient-luxury);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .text-gold {
+    color: hsl(var(--accent));
+  }
+  .glow-primary {
+    box-shadow: var(--shadow-elegant);
+  }
+  .glow-gold {
+    box-shadow: var(--shadow-gold);
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(hsl(217 91% 60% / 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(217 91% 60% / 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+}
+
+@layer utilities {
+  .animate-float { animation: float 6s ease-in-out infinite; }
+  .animate-glow-pulse { animation: glow-pulse 3s ease-in-out infinite; }
+  .animate-shimmer { animation: shimmer 2.5s linear infinite; background-size: 200% 100%; }
+  .animate-fade-up { animation: fade-up 0.8s var(--transition-smooth) both; }
+  .animate-spin-slow { animation: spin 30s linear infinite; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 30px hsl(217 91% 60% / 0.3); }
+  50% { box-shadow: 0 0 60px hsl(217 91% 60% / 0.6), 0 0 100px hsl(38 92% 55% / 0.2); }
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
