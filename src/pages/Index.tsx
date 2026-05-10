@@ -135,7 +135,7 @@ const Index = () => {
             {/* Subtle glow instead of heavy blur */}
             <div className="absolute -inset-1 bg-gradient-to-r from-gold/20 to-luxury/20 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
             <img 
-              src="/src/images/book.png" 
+              src="/book.png" 
               alt="Pakistan Affairs on Fingertips by Haseeb Swati" 
               className="relative z-10 rounded-lg shadow-2xl transition-transform duration-500 w-full max-w-[450px] md:max-w-[500px] h-auto object-contain" 
             />
