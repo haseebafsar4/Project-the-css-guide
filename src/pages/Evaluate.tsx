@@ -61,13 +61,33 @@ const Evaluate = () => {
       return;
     }
     setLoading(true);
+
     try {
+      // 1. SMART MAPPING: Fetch instructions using 'ilike' for fuzzy matching
+      // This handles "Pakistan Affairs" vs "Pakistan Affairs Situation"
+      const { data: adminInstructions } = await supabase
+        .from('admin_instructions')
+        .select('grading_rules')
+        // We look for a category that is contained within or matches the topic
+        .ilike('category_name', `%${topic}%`) 
+        .maybeSingle();
+
+      const finalInstructions = adminInstructions?.grading_rules 
+        || "Provide a standard evaluation focusing on grammar, structure, and CSS exam standards.";
+
+      // 2. Invoke the function with the mapped instructions
       const { data, error } = await supabase.functions.invoke("evaluate-paragraph", {
-        body: { topic, paragraph },
+        body: { 
+          topic, 
+          paragraph, 
+          adminPrompt: finalInstructions // We pass the mapped rules here
+        },
       });
+
       if (error) throw error;
       if (data?.error) throw new Error(data.error);
 
+      // 3. Insert into submissions
       const { data: ins, error: insErr } = await supabase.from("submissions").insert({
         user_id: user.id,
         topic,
@@ -76,11 +96,13 @@ const Evaluate = () => {
         overall_score: data.result.overallScore,
         grade: data.result.grade,
       }).select("id").single();
+
       if (insErr) throw insErr;
 
       toast.success("Evaluation complete");
       navigate(`/results/${ins.id}`);
     } catch (e: any) {
+      console.error("Error details:", e);
       toast.error(e.message || "Evaluation failed");
     } finally {
       setLoading(false);
